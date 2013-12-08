@@ -32,8 +32,6 @@ public class TextAnalysis {
 
   public static final String WORD_LIST_EXTENSION = ".words";
   public static TimeToCrack crack = TimeToCrack.GPU1;
-  public PersonalInfoAnalysis crackInfo = new PersonalInfoAnalysis();
-  
 
   public static void main(String[] args) throws IOException, Exception {
     TextAnalysis analyzer = new TextAnalysis();
@@ -109,8 +107,7 @@ public class TextAnalysis {
           
 		  System.out.println("\nInput personal information for better password evaluation?(y/n)");
 		  infoAnalysisChoice = buf_in.readLine();
-		  if(infoAnalysisChoice.equals("y")) System.out.println("haha");
-		  System.out.println(infoAnalysisChoice);
+		  if(infoAnalysisChoice.equals("y")) infoAnalyse();
 		  
 		  // Process with the String, Machine Choice and Hash Algorithm Choice
           process(str, machineNum, hashNum);
@@ -176,5 +173,10 @@ public class TextAnalysis {
     System.out.format("Estimated time to crack with %s GPU(s): %s\n",
         crack.getNumberOfGPUs(), crack.getTimeToCrackString(worst.getTotalCost()));
     System.out.format("Analysis Time: %f seconds\n", (now - then) / (double) 1000);
+  }
+  
+  private void infoAnalyse() throws IOException, Exception {
+    PersonalInfoAnalysis crackInfo = new PersonalInfoAnalysis();
+    crackInfo.run();
   }
 }

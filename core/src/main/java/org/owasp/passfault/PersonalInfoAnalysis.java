@@ -26,5 +26,8 @@ package org.owasp.passfault;
  */
  
  public class PersonalInfoAnalysis {
- 
+   
+   public void run() {
+     System.out.println("aa");
+   }
  }
