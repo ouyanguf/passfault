@@ -18,6 +18,7 @@ The core library includes a command-line interface.
 4) java -jar core/build/lib/core-0.7.jar
 
 The JSON service is the same as is hosted on passfault.com.  It includes a javascript front-end that hits the json service with password analysis requests.
+
 1) cd jsonService
 
 2) gradle build jettyRunWar
