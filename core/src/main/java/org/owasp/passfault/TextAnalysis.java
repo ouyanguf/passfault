@@ -32,6 +32,7 @@ public class TextAnalysis {
 
   public static final String WORD_LIST_EXTENSION = ".words";
   public static TimeToCrack crack = TimeToCrack.GPU1;
+  public PersonalInfoAnalysis crackInfo = new PersonalInfoAnalysis();
   
 
   public static void main(String[] args) throws IOException, Exception {
@@ -78,6 +79,7 @@ public class TextAnalysis {
     String str = "q";
     String machineChoice = "1";
     String hashChoice = "1";
+	String infoAnalysisChoice = "n";
     try {
       // Read a whole line a time. Check the string for
       // the "quit" input to jump from the loop.
@@ -100,11 +102,17 @@ public class TextAnalysis {
           System.out.println("\nChoose a machine from the following list to crack the password:");
           System.out.println("[1] bcrypt");
           System.out.println("[2] md5crypt");
-	  System.out.println("[3] sha512crypt");
+		  System.out.println("[3] sha512crypt");
           System.out.println("[4] Password Safe"); 
           hashChoice = buf_in.readLine();
           int hashNum = Integer.parseInt(hashChoice);
           
+		  System.out.println("\nInput personal information for better password evaluation?(y/n)");
+		  infoAnalysisChoice = buf_in.readLine();
+		  if(infoAnalysisChoice.equals("y")) System.out.println("haha");
+		  System.out.println(infoAnalysisChoice);
+		  
+		  // Process with the String, Machine Choice and Hash Algorithm Choice
           process(str, machineNum, hashNum);
         } else {
 
@@ -141,7 +149,7 @@ public class TextAnalysis {
       case 3: crack.setHashType("sha512crypt", hashNum);
               break;
       case 4: crack.setHashType("Password Safe", hashNum);
-	      break;
+	          break;
       default: crack.setHashType("bcrypt", hashNum);
                break;
     }

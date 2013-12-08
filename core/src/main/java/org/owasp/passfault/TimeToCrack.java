@@ -42,11 +42,11 @@ public enum TimeToCrack {
   public void setHashType(String hashType, int hashNum) {
     switch (hashNum) {
       case 1:  crackTimeNanosecs = 259000;//bcrypt
-	       break;
+	           break;
       case 2:  crackTimeNanosecs = 226;//md5crypt 
                break;
       case 3:  crackTimeNanosecs = 29247;//sha512crypt
-	       break;
+	           break;
       case 4:  crackTimeNanosecs = 1543;//Password Safe
                break;  
       default: crackTimeNanosecs = 259000;//default: bcrypt

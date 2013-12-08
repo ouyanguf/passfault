@@ -19,7 +19,9 @@ The core library includes a command-line interface.
 
 The JSON service is the same as is hosted on passfault.com.  It includes a javascript front-end that hits the json service with password analysis requests.
 1) cd jsonService
+
 2) gradle build jettyRunWar
+
 3) browse to localhost:8080/jsonService
 
 Other projects include a client side non-gui Applet (accessible via javascript and returns JSON), and a JavaFX 1.x client.  Those projects do not have a well established build and will likely require some tweaking.
