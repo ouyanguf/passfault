@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+provider: gradle
+Implementation-Title: OWASP Passfault
+Implementation-Version: 0.7
+Main-Class: org.owasp.passfault.TextAnalysis
+
