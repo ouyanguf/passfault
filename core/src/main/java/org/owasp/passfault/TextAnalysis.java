@@ -168,11 +168,11 @@ public class TextAnalysis {
       System.out.format("\t%3.2f percent of password strength\n", subPattern.getCost() / costSum * 100);
     }
 
-    System.out.print("Total passwords in all patterns: ");
+    System.out.print("\nTotal passwords in all patterns: ");
     System.out.println(crack.getRoundedSizeString(worst.getTotalCost()));
-    System.out.format("Estimated time to crack with %s GPU(s): %s\n",
+    System.out.format("\nEstimated time to crack with %s GPU(s): %s\n",
         crack.getNumberOfGPUs(), crack.getTimeToCrackString(worst.getTotalCost()));
-    System.out.format("Analysis Time: %f seconds\n", (now - then) / (double) 1000);
+    System.out.format("\nAnalysis Time: %f seconds\n", (now - then) / (double) 1000);
   }
   
   private void infoAnalyse(String password) throws IOException, Exception {

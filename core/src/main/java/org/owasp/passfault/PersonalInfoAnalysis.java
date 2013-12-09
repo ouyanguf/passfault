@@ -89,7 +89,7 @@ public class PersonalInfoAnalysis {
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
 				System.out
-						.println("Password contains information of your Name!");
+						.println("\nPassword contains information of your Name!");
 				break;
 			}
 		}
@@ -129,7 +129,7 @@ public class PersonalInfoAnalysis {
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
 				System.out
-						.println("Password contains information of your Birthday!");
+						.println("\nPassword contains information about your Birthday!");
 				break;
 			}
 		}
@@ -171,7 +171,7 @@ public class PersonalInfoAnalysis {
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
 				System.out
-						.println("Password contains information about your Phone Number!");
+						.println("\nPassword contains information about your Phone Number!");
 				break;
 			}
 		}
@@ -200,7 +200,7 @@ public class PersonalInfoAnalysis {
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
 				System.out
-						.println("Password contains information of your Email!");
+						.println("\nPassword contains information of your Email!");
 				break;
 			}
 		}
@@ -210,7 +210,6 @@ public class PersonalInfoAnalysis {
 	public void run() throws IOException {
 		getInfo();
 		analyseAll();
-
 	}
 
 	//public static void main(String[] args) throws IOException {
