@@ -39,6 +39,7 @@ public class PersonalInfoAnalysis {
 	String phone;
 	String email;
 	String birth;
+	boolean goodPass = true;
 	BufferedReader buf_in = new BufferedReader(new InputStreamReader(System.in));
 
 	public PersonalInfoAnalysis(String password) {
@@ -47,13 +48,13 @@ public class PersonalInfoAnalysis {
 
 	public void getInfo() throws IOException {
 		try {
-			System.out.println("Name:");
+			System.out.print("\nName: ");
 			name = buf_in.readLine();
-			System.out.println("Birthday(e.g.19880930):");
+			System.out.print("\nBirthday(e.g.19880930): ");
 			birth = buf_in.readLine();
-			System.out.println("Phone Number(e.g.3527778888):");
+			System.out.print("\nPhone Number(e.g.3527778888): ");
 			phone = buf_in.readLine();
-			System.out.println("Email:");
+			System.out.print("\nEmail: ");
 			email = buf_in.readLine();
 		} catch (Exception e) {
 			System.out.println("IO exception = " + e);
@@ -69,16 +70,17 @@ public class PersonalInfoAnalysis {
 
 	public void analyseName() {
 		ArrayList<String> cases = new ArrayList<String>();
-		cases.add(name);
-		cases.add(new StringBuilder(name).reverse().toString());
-		cases.add(name.replace('a', '@').replace('s', '$').replace('o', '0'));
+		cases.add(name); // Name
+		cases.add(new StringBuilder(name).reverse().toString()); // Reversed Name
+		cases.add(name.replace('a', '@').replace('s', '$').replace('o', '0')); // Deal with special character replacement
 		cases.add(name.replace('a', '@'));
 		cases.add(name.replace('s', '$'));
 		cases.add(name.replace('o', '0'));
-		cases.add(new StringBuilder(cases.get(2)).reverse().toString());
+		cases.add(new StringBuilder(cases.get(2)).reverse().toString()); // Reversed version of previous info
 		cases.add(new StringBuilder(cases.get(3)).reverse().toString());
 		cases.add(new StringBuilder(cases.get(4)).reverse().toString());
 		cases.add(new StringBuilder(cases.get(5)).reverse().toString());
+		
 		// Collections.addAll(cases, name.split(" "));
 		for (String seg : name.split(" ")) {
 			cases.add(seg);
@@ -88,8 +90,9 @@ public class PersonalInfoAnalysis {
 		// Check Cases
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
-				System.out
-						.println("\nPassword contains information of your Name!");
+				System.out.println("\nPassword contains information about your Name!");
+				System.out.println("Password '"+ pass + "'contains '" + seg + "'!");
+				goodPass = false;
 				break;
 			}
 		}
@@ -111,25 +114,13 @@ public class PersonalInfoAnalysis {
 			cases.add(new StringBuilder(cases.get(5)).reverse().toString());
 			// cases.add(new StringBuilder(cases.get(6)).reverse().toString());
 		}
-		// cases.add(name.replace('a', '@').replace('s', '$').replace('o',
-		// '0'));
-		// cases.add(name.replace('a', '@'));
-		// cases.add(name.replace('s', '$'));
-		// cases.add(name.replace('o', '0'));
-		// cases.add(new StringBuilder(cases.get(2)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(3)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(4)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(5)).reverse().toString());
-		// Collections.addAll(cases, name.split(" "));
-		// for (String seg : name.split(" ")) {
-		// cases.add(seg);
-		// }
 
 		// Check Cases
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
-				System.out
-						.println("\nPassword contains information about your Birthday!");
+				System.out.println("\nPassword contains information about your Birthday!");
+				System.out.println("Password '" + pass + "' contains '" + seg + "'!");
+				goodPass = false;
 				break;
 			}
 		}
@@ -152,26 +143,17 @@ public class PersonalInfoAnalysis {
 			cases.add(new StringBuilder(cases.get(5)).reverse().toString());
 			cases.add(new StringBuilder(cases.get(6)).reverse().toString());
 		}
-		// cases.add(name.replace('a', '@').replace('s', '$').replace('o',
-		// '0'));
-		// cases.add(name.replace('a', '@'));
-		// cases.add(name.replace('s', '$'));
+
 		cases.add(phone.replace('0', 'o'));
 		cases.add(new StringBuilder(cases.get(cases.size() - 1)).reverse()
 				.toString());
-		// cases.add(new StringBuilder(cases.get(3)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(4)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(5)).reverse().toString());
-		// Collections.addAll(cases, name.split(" "));
-		// for (String seg : name.split(" ")) {
-		// cases.add(seg);
-		// }
 
 		// Check Cases
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
-				System.out
-						.println("\nPassword contains information about your Phone Number!");
+				System.out.println("\nPassword contains information about your Phone Number!");
+				System.out.println("Password '" + pass + "' contains '" + seg + "'!");
+				goodPass = false;
 				break;
 			}
 		}
@@ -190,17 +172,13 @@ public class PersonalInfoAnalysis {
 		cases.add(email.replace('a', '@'));
 		cases.add(email.replace('s', '$'));
 		cases.add(email.replace('o', '0'));
-		// cases.add(new StringBuilder(cases.get(2)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(3)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(4)).reverse().toString());
-		// cases.add(new StringBuilder(cases.get(5)).reverse().toString());
-		// Collections.addAll(cases, name.split(" "));
 
 		// Check Cases
 		for (String seg : cases) {
 			if (pass.contains(seg)) {
-				System.out
-						.println("\nPassword contains information of your Email!");
+				System.out.println("\nPassword contains information about your Email!");
+				System.out.println("Password '" + pass + "' contains '" + seg + "'!");
+				goodPass = false;
 				break;
 			}
 		}
@@ -210,10 +188,8 @@ public class PersonalInfoAnalysis {
 	public void run() throws IOException {
 		getInfo();
 		analyseAll();
+		if(goodPass)
+		    System.out.println("\nPassword doesn't contain personal information!");
 	}
 
-	//public static void main(String[] args) throws IOException {
-		//PersonalInfoAnalysis crackInfo = new PersonalInfoAnalysis("asd1387weoi");
-		//crackInfo.run();
-	//}
 }

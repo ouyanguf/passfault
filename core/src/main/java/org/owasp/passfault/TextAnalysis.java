@@ -35,7 +35,6 @@ public class TextAnalysis {
 
   public static void main(String[] args) throws IOException, Exception {
     TextAnalysis analyzer = new TextAnalysis();
-    analyzer.printBanner();
     analyzer.run();
   }
   private final PatternFinder finder;
@@ -53,7 +52,7 @@ public class TextAnalysis {
     finder = new SequentialFinder(finders);
   }
 
-  public void printBanner(){
+  public static void printBanner(){
     System.out.print(
 "                                         /******                    /**   /**                \n"+
 "                                        /**__  **                  | **  | **                \n"+
@@ -83,34 +82,45 @@ public class TextAnalysis {
       // the "quit" input to jump from the loop.
 
       do {
+	    // Print banner
+		System.out.println("\n");
+	    printBanner();
         // Read text from keyboard
-        System.out.println("\nPlease enter a password: (Enter 'q' to exit)");
+		System.out.println("\n===============================================================");
+        System.out.println("Please enter a password: (Enter 'q' to exit)");
         str = buf_in.readLine();
         if (!str.toLowerCase().equals("q")) {
           // Read the choice of cracking machine
-          System.out.println("\nChoose a machine from the following list to crack the password:");
+		  System.out.println("\n===============================================================");
+          System.out.println("Choose a machine to crack the password:");
           System.out.println("[1] 1 high-end GPU(Every day hacker, $500)");
           System.out.println("[2] 10 high-end GPUs(Dedicated hacker, $5,000)");
           System.out.println("[3] 100 high-end GPUs(Organized crime hacker, $50,000)");
           System.out.println("[4] 1000 high-end GPUs(Government, $500,000)");
+		  System.out.print("\nYour Choice: ");
           machineChoice = buf_in.readLine();
           int machineNum = Integer.parseInt(machineChoice);
           
           // Read choice of hashing algorithm
-          System.out.println("\nChoose a machine from the following list to crack the password:");
+		  System.out.println("\n===============================================================");
+          System.out.println("Choose an algorithm used to hash the password:");
           System.out.println("[1] bcrypt");
           System.out.println("[2] md5crypt");
 		  System.out.println("[3] sha512crypt");
           System.out.println("[4] Password Safe"); 
+		  System.out.print("\nYour Choice: ");
           hashChoice = buf_in.readLine();
           int hashNum = Integer.parseInt(hashChoice);
           
-		  System.out.println("\nInput personal information for better password evaluation?(y/n)");
+		  System.out.println("\n===============================================================");
+		  System.out.println("Input personal information for better password evaluation?(y/n)");
+		  System.out.print("\nYour Choice: ");
 		  infoAnalysisChoice = buf_in.readLine();
 		  if(infoAnalysisChoice.equals("y")) infoAnalyse(str);
 		  
 		  // Process with the String, Machine Choice and Hash Algorithm Choice
           process(str, machineNum, hashNum);
+		  Thread.sleep(3000);
         } else {
 
           break;
@@ -156,13 +166,15 @@ public class TextAnalysis {
     PathCost worst = analysis.calculateHighestProbablePatterns();
     long now = System.currentTimeMillis();
     List<PasswordPattern> path = worst.getPath();
-    System.out.println("\n\nMost crackable combination of patterns:");
+	System.out.println("\n\n===============================================================");
+    System.out.println("Most crackable combination of patterns:");
     double costSum = 0;
     for (PasswordPattern subPattern : path) {
       //get the sum of pattern costs:
       costSum += subPattern.getCost();
     }
     for (PasswordPattern subPattern : path) {
+	  System.out.println("\n---------------------------------------------------------------");
       System.out.format("'%s' matches the pattern '%s'\n", subPattern.getMatchString(), subPattern.getDescription());
       System.out.format("\t%s passwords in the pattern\n", crack.getRoundedSizeString(subPattern.getCost()));
       System.out.format("\t%3.2f percent of password strength\n", subPattern.getCost() / costSum * 100);
@@ -170,9 +182,9 @@ public class TextAnalysis {
 
     System.out.print("\nTotal passwords in all patterns: ");
     System.out.println(crack.getRoundedSizeString(worst.getTotalCost()));
-    System.out.format("\nEstimated time to crack with %s GPU(s): %s\n",
+    System.out.format("Estimated time to crack with %s GPU(s): %s\n",
         crack.getNumberOfGPUs(), crack.getTimeToCrackString(worst.getTotalCost()));
-    System.out.format("\nAnalysis Time: %f seconds\n", (now - then) / (double) 1000);
+    System.out.format("Analysis Time: %f seconds\n", (now - then) / (double) 1000);
   }
   
   private void infoAnalyse(String password) throws IOException, Exception {
